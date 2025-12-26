@@ -3,10 +3,5 @@
   "description": "TON Connect Demo",
   "icons": ["https://raw.githubusercontent.com/kyawsanoo/tonconnect-manifest/main/icon.png"],
   "permissions": ["ton_connect"],
-  "manifestUrl": "https://raw.githubusercontent.com/kyawsanoo/tonconnect-manifest/main/tonconnect-manifest.json",
-  "callback": "fundora://callback",
-  "items": [
-    { "name": "ton_addr" },
-    { "name": "ton_proof", "payload": "<nonce>" }
-  ]
+  "version": "1.0.0"
 }
