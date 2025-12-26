@@ -1,0 +1,6 @@
+{
+  "name": "Fundora",
+  "description": "TON Connect Demo",
+  "icons": ["https://raw.githubusercontent.com/yourusername/tonconnect-manifest/main/icon.png"],
+  "permissions": ["ton_connect"]
+}
