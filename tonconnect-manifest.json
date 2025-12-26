@@ -1,5 +1,7 @@
 {
+  "url": "https://raw.githubusercontent.com/kyawsanoo/tonconnect-manifest/main/dummy.html",
   "name": "Fundora",
+  "iconUrl": "https://raw.githubusercontent.com/kyawsanoo/tonconnect-manifest/main/icon.png",
   "description": "TON Connect Demo",
   "icons": ["https://raw.githubusercontent.com/kyawsanoo/tonconnect-manifest/main/icon.png"],
   "permissions": ["ton_connect"],
