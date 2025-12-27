@@ -1,11 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Fundora</title>
+    <meta charset="UTF-8">
+    <title>Fundora TON Connect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        button {
+            padding: 16px 32px;
+            font-size: 18px;
+            background-color: #0088CC;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #006699;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Fundora</h1>
-    <p>This is the official website.</p>
+
+<h1>Fundora Wallet Connect</h1>
+<p>Click the button below to open Fundora app:</p>
+<button onclick="openApp()">Open Fundora App</button>
+
+<script>
+function openApp() {
+    const deepLink = "fundora://callback";
+    const apkUrl = "https://zyczqnpuwpxidaktpfzm.supabase.co/storage/v1/object/public/apks/app-release.apk";
+    
+    // Record the current time
+    const start = new Date().getTime();
+    
+    // Try to open the app
+    window.location = deepLink;
+
+    // If the app is not installed, redirect to APK after 2 seconds
+    setTimeout(() => {
+        const end = new Date().getTime();
+        if (end - start < 2100) {
+            window.location.href = apkUrl;
+        }
+    }, 2000);
+}
+</script>
+
 </body>
 </html>
