@@ -28,6 +28,16 @@
         button:hover {
             background-color: #006699;
         }
+        .download-btn {
+            background-color: #4CAF50;
+        }
+        .download-btn:hover {
+            background-color: #388E3C;
+        }
+        p {
+            margin-top: 20px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
@@ -36,24 +46,18 @@
 <p>Click the button below to open Fundora app:</p>
 <button onclick="openApp()">Open Fundora App</button>
 
+<p>If you have not installed Fundora, download it:</p>
+<button class="download-btn" onclick="downloadApk()">Download APK</button>
+
 <script>
 function openApp() {
     const deepLink = "fundora://callback";
-    const apkUrl = "https://zyczqnpuwpxidaktpfzm.supabase.co/storage/v1/object/public/apks/app-release.apk";
-    
-    // Record the current time
-    const start = new Date().getTime();
-    
-    // Try to open the app
     window.location = deepLink;
+}
 
-    // If the app is not installed, redirect to APK after 2 seconds
-    setTimeout(() => {
-        const end = new Date().getTime();
-        if (end - start < 2100) {
-            window.location.href = apkUrl;
-        }
-    }, 2000);
+function downloadApk() {
+    const apkUrl = "https://zyczqnpuwpxidaktpfzm.supabase.co/storage/v1/object/public/apks/app-release.apk";
+    window.location.href = apkUrl;
 }
 </script>
 
