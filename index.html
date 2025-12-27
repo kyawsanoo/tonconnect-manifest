@@ -44,10 +44,8 @@
 
 <h1>Fundora Wallet Connect</h1>
 <p>Click the button below to open Fundora app:</p>
-<button onclick="openApp()">Open Fundora App</button>
+<button onclick="openApp()">Back to Fundora App</button>
 
-<p>If you have not installed Fundora, download it:</p>
-<button class="download-btn" onclick="downloadApk()">Download APK</button>
 
 <script>
 function openApp() {
@@ -55,10 +53,6 @@ function openApp() {
     window.location = deepLink;
 }
 
-function downloadApk() {
-    const apkUrl = "https://zyczqnpuwpxidaktpfzm.supabase.co/storage/v1/object/public/apks/app-release.apk";
-    window.location.href = apkUrl;
-}
 </script>
 
 </body>
