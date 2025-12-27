@@ -1,65 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Fundora TON Connect</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            text-align: center;
-        }
-        button {
-            padding: 16px 32px;
-            font-size: 18px;
-            background-color: #0088CC;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        button:hover {
-            background-color: #006699;
-        }
-        .download-btn {
-            background-color: #4CAF50;
-        }
-        .download-btn:hover {
-            background-color: #388E3C;
-        }
-        p {
-            margin-top: 20px;
-            font-size: 16px;
-        }
-    </style>
+<meta charset="utf-8">
+<title>TonConnect Callback</title>
+<script>
+    // Extract URL params from TonConnect redirect
+    const params = new URLSearchParams(window.location.search);
+    const wallet = params.get("ton_addr");
+    const proof = params.get("ton_proof");
+    const payload = params.get("payload");
+
+    // Redirect to Android via intent
+    if (wallet && proof && payload) {
+        window.location.href = `intent://callback?ton_addr=${wallet}&ton_proof=${proof}&payload=${payload}#Intent;scheme=fundora;package=app.finance.fundora;end`;
+    }
+</script>
 </head>
 <body>
-
-<h1>Fundora Wallet Connect</h1>
-<p>Click the button below to open Fundora app:</p>
-<button onclick="openApp()">Open Fundora App</button>
-
-<p>If you have not installed Fundora, download it:</p>
-<button class="download-btn" onclick="downloadApk()">Download APK</button>
-
-<script>
-function openApp() {
-    const deepLink = "fundora://callback";
-    window.location = deepLink;
-}
-
-function downloadApk() {
-    const apkUrl = "https://zyczqnpuwpxidaktpfzm.supabase.co/storage/v1/object/public/apks/app-release.apk";
-    window.location.href = apkUrl;
-}
-</script>
-
+<p>Processing TonConnect login…</p>
 </body>
 </html>
