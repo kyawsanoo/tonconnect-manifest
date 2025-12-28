@@ -5,7 +5,7 @@
   "icons": ["https://raw.githubusercontent.com/kyawsanoo/tonconnect-manifest/main/icon.png"],
   "permissions": ["ton_addr"],
   "support": { "url": "https://raw.githubusercontent.com/kyawsanoo/tonconnect-manifest/main/support.html" },
-  "returnUrl": "fundora://callback",
+  "returnUrl": "https://kyawsanoo.github.io/fundora/",
   "url": "https://kyawsanoo.github.io/tonconnect-manifest",
   "termsOfUseUrl": "https://raw.githubusercontent.com/kyawsanoo/tonconnect-manifest/main/terms.html",
   "privacyPolicyUrl": "https://raw.githubusercontent.com/kyawsanoo/tonconnect-manifest/main/privacy.html"
