@@ -1,7 +1,7 @@
 {
+   "url": "https://kyawsanoo.github.io/fundora",
   "name": "Fundora",
-  "description": "TON Connect Demo",
-  "icons": ["https://kyawsanoo.github.io/fundora/icon.png"],
-  "permissions": ["ton_connect"]
+  "iconUrl": "https://kyawsanoo.github.io/fundora/icon.png",
+  "termsOfUseUrl": "https://kyawsanoo.github.io/fundora/terms",
+  "privacyPolicyUrl": "https://kyawsanoo.github.io/fundora/privacy"
 }
-
