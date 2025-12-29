@@ -5,16 +5,26 @@
 <title>Fundora TON Connect</title>
 <script src="https://cdn.jsdelivr.net/npm/@tonconnect/ui@2.0.12/dist/tonconnect-ui.min.js"></script>
 <style>
-body { font-family: sans-serif; padding: 24px; }
+body { font-family: sans-serif; padding: 24px; background:#0f1115; color:white; }
 #tonconnect { margin-top: 20px; }
+button { margin-top: 16px; padding: 8px 12px; font-size:16px; }
 </style>
 </head>
 <body>
 
 <h2>Connect TON Wallet</h2>
 <div id="tonconnect"></div>
+<div id="status">Waiting for Fundora…</div>
+<button id="disconnectBtn">Force Disconnect</button>
 
 <script>
+const status = document.getElementById("status");
+
+function log(msg) {
+    status.innerText = msg;
+    console.log(msg);
+}
+
 // Get nonce from URL query
 const params = new URLSearchParams(window.location.search);
 const nonce = params.get("nonce");
@@ -35,10 +45,18 @@ tonUI.render("tonconnect");
 // Start wallet connection
 tonUI.connectWallet({ tonProof: { payload: nonce } });
 
-// Listen for status changes (optional)
+// Listen for status changes
 tonUI.onStatusChange(wallet => {
     if (!wallet) return;
-    console.log("Wallet connected:", wallet.account.address);
+    log("Wallet connected: " + wallet.account.address);
+});
+
+// Force disconnect button
+document.getElementById("disconnectBtn").addEventListener("click", () => {
+    if (tonUI) {
+        tonUI.disconnect();
+        log("Disconnected. You can now reconnect and see the login UI.");
+    }
 });
 </script>
 </body>
