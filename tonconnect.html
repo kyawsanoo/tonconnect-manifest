@@ -1,8 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Fundora TON Connect</title>
 <script src="https://cdn.jsdelivr.net/npm/@tonconnect/ui@2.0.12/dist/tonconnect-ui.min.js"></script>
+</head>
+<body>
+<h2>Connect TON Wallet</h2>
+<div id="tonconnect"></div>
+
 <script>
 const params = new URLSearchParams(window.location.search)
 const nonce = params.get("nonce")
-
 if (!nonce) throw "Missing nonce"
 
 const tonUI = new TON_CONNECT_UI.TonConnectUI({
@@ -12,6 +21,17 @@ const tonUI = new TON_CONNECT_UI.TonConnectUI({
     }
 })
 
+// Render UI
+tonUI.render("tonconnect")
+
+// Start wallet connection
 tonUI.connectWallet({ tonProof: { payload: nonce } })
-tonUI.render("tc")
+
+// Listen for status changes
+tonUI.onStatusChange(wallet => {
+    if (!wallet) return
+    console.log("Wallet connected:", wallet.account.address)
+})
 </script>
+</body>
+</html>
