@@ -6,25 +6,10 @@
 <title>Fundora TON Connect</title>
 <script src="https://cdn.jsdelivr.net/npm/@tonconnect/ui@2.0.12/dist/tonconnect-ui.min.js"></script>
 <style>
-body {
-    font-family: system-ui, sans-serif;
-    background: #0f1115;
-    color: white;
-    padding: 16px;
-}
-h2 {
-    margin-bottom: 16px;
-}
-#tonconnect {
-    width: 100%;
-    max-width: 400px;
-    height: 400px; /* Must have visible height */
-    margin-top: 16px;
-}
-#status {
-    margin-top: 16px;
-    opacity: 0.8;
-}
+body { font-family: system-ui, sans-serif; background: #0f1115; color: white; padding: 16px; }
+h2 { margin-bottom: 16px; }
+#tonconnect { width: 100%; max-width: 400px; height: 400px; margin-top: 16px; }
+#status { margin-top: 16px; opacity: 0.8; }
 </style>
 </head>
 <body>
@@ -41,7 +26,12 @@ window.addEventListener('DOMContentLoaded', () => {
         console.log(msg);
     }
 
-    // Get nonce from URL query
+    // Clear any cached session
+    localStorage.removeItem("tonconnect_wallet");
+    localStorage.removeItem("tonconnect_proof");
+    log("Previous sessions cleared");
+
+    // Get nonce from URL
     const params = new URLSearchParams(window.location.search);
     const nonce = params.get("nonce");
     if (!nonce) {
@@ -49,9 +39,9 @@ window.addEventListener('DOMContentLoaded', () => {
         throw "Missing nonce";
     }
 
-    log("Initializing TonConnect…");
+    log("Initializing TonConnect UI…");
 
-    // Initialize TonConnect UI
+    // Initialize TonConnect
     const tonUI = new TON_CONNECT_UI.TonConnectUI({
         manifestUrl: "https://zyczqnpuwpxidaktpfzm.supabase.co/storage/v1/object/public/tonconnect/tonconnect-manifest.json?v=2",
         actionsConfiguration: {
@@ -59,13 +49,13 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Render TonConnect UI in div
+    // Render UI in div
     tonUI.render("tonconnect");
 
-    // Start wallet connection
+    // Force wallet selection and start connection
     tonUI.connectWallet({
         tonProof: { payload: nonce },
-        forceSelectWallet: true // ensure chooser shows even if cached session exists
+        forceSelectWallet: true
     });
 
     // Listen for wallet connection
@@ -73,17 +63,18 @@ window.addEventListener('DOMContentLoaded', () => {
         if (!wallet) return;
         log("Wallet connected: " + wallet.account.address);
 
-        // Optionally, store proof or notify your Android app
         const proof = wallet.connectItems?.tonProof?.proof || "";
         console.log("TonProof:", proof);
 
+        // Notify Android app if available
         if (window.Android && window.Android.onWalletConnected) {
             window.Android.onWalletConnected(wallet.account.address, proof);
         }
     });
 
-    log("TonConnect UI initialized, waiting for wallet...");
+    log("TonConnect UI initialized. Waiting for wallet selection...");
 });
 </script>
+
 </body>
 </html>
